@@ -44,36 +44,23 @@ document.addEventListener('DOMContentLoaded', function() {
             const answer = item.querySelector('.faq-answer');
             const isOpen = question.classList.contains('active');
 
-            // Fecha todos os outros itens abertos
+            // Fecha todos os outros itens abertos para garantir que apenas um esteja aberto de cada vez
             faqItems.forEach(otherItem => {
-                otherItem.querySelector('.faq-question').classList.remove('active');
-                otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                if (otherItem !== item) {
+                    otherItem.querySelector('.faq-question').classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                }
             });
             
             // Abre ou fecha o item clicado
             if (!isOpen) {
                 question.classList.add('active');
                 answer.style.maxHeight = answer.scrollHeight + 'px';
+            } else {
+                question.classList.remove('active');
+                answer.style.maxHeight = null;
             }
         });
     });
 
 });
-
-// Keyframes de animação para os links (não pode ser no JS, adicionar no CSS)
-// @keyframes navLinkFade { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0px); } }
-// Para simplicidade, a animação é feita diretamente no CSS e o JS apenas a ativa.
-// Adicione a animação no final do seu arquivo style.css:
-
-/*
-@keyframes navLinkFade {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-*/
