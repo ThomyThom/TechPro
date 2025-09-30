@@ -6,6 +6,7 @@
     --bg-color: hsl(var(--hue), 30%, 96%);
     --text-color: hsl(var(--hue), 10%, 20%);
     --card-bg-color: hsl(var(--hue), 30%, 100%);
+    --header-bg-color: hsla(var(--hue), 30%, 100%, 0.85);
     --primary-color: hsl(var(--hue), 100%, 50%);
     --primary-color-alt: hsl(var(--hue), 100%, 45%);
     --section-bg-color: hsl(var(--hue), 30%, 92%);
@@ -21,6 +22,7 @@ body.dark-mode {
     --bg-color: hsl(var(--hue), 10%, 12%);
     --text-color: hsl(var(--hue), 20%, 88%);
     --card-bg-color: hsl(var(--hue), 12%, 18%);
+    --header-bg-color: hsla(var(--hue), 12%, 18%, 0.75);
     --primary-color: hsl(var(--hue), 100%, 58%);
     --primary-color-alt: hsl(var(--hue), 100%, 52%);
     --section-bg-color: hsl(var(--hue), 10%, 15%);
@@ -80,8 +82,17 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: background-color 0.4s;
+    transition: background-color 0.4s, box-shadow 0.3s;
 }
+
+/* EFEITO GLASSMORPHISM AO ROLAR */
+header.scrolled {
+    background-color: var(--header-bg-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Suporte para Safari */
+    box-shadow: 0 4px 15px hsla(var(--shadow-color), 0.08);
+}
+
 
 nav {
     display: flex;
@@ -440,11 +451,12 @@ input:checked + .slider .fa-sun { opacity: 0; }
 input:not(:checked) + .slider .fa-moon { opacity: 0; }
 
 
-/* --- RESPONSIVIDADE (MENU HAMBÚRGUER) --- */
+/* --- RESPONSIVIDADE E NOVO MENU MOBILE --- */
 .burger { 
     display: none; 
     cursor: pointer; 
-    z-index: 1001; /* Garante que o burger fique acima de outros elementos */
+    z-index: 1001;
+    padding: 5px; /* Área de toque maior */
 }
 .burger div { 
     width: 25px; 
@@ -456,34 +468,47 @@ input:not(:checked) + .slider .fa-moon { opacity: 0; }
 
 @media screen and (max-width: 768px) {
     .theme-switch-wrapper {
-        order: -1; /* Move o switch para a esquerda no mobile */
+        order: -1;
         margin-left: 0;
         margin-right: 20px;
     }
     
     .nav-links {
         position: fixed;
-        right: -100%;
+        left: -100%; /* Começa fora da tela à esquerda */
+        top: 0;
         height: 100vh;
-        top: 0; /* Alinhado ao topo */
-        background-color: var(--bg-color);
+        width: 100%;
+        background-color: var(--header-bg-color);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         flex-direction: column;
-        width: 70%; /* Um pouco maior para toque */
         justify-content: center;
-        gap: 40px;
-        transition: right 0.5s ease-in-out;
-        border-left: 1px solid var(--section-bg-color);
-        box-shadow: -5px 0 15px hsla(var(--shadow-color), 0.1);
+        gap: 2.5rem; /* Espaçamento maior */
+        transition: left 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+        padding: 0;
     }
-    .nav-links.nav-active { right: 0; }
-    .nav-links li { margin: 0; }
-    .nav-links a { font-size: 1.2rem; }
+    
+    .nav-links.nav-active { 
+        left: 0; 
+    }
+    
+    .nav-links li { 
+        margin: 0; 
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    
+    .nav-links a { 
+        font-size: 2rem; /* Links maiores e mais fáceis de tocar */
+        font-family: var(--font-title);
+    }
     
     .burger { display: block; }
 
-    /* Animação do Burger para "X" */
+    /* Animação do Burger para "X" mais fluida */
     .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
-    .toggle .line2 { opacity: 0; }
+    .toggle .line2 { opacity: 0; transform: translateX(20px); }
     .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
     
     .sobre-content { flex-direction: column; text-align: center; }

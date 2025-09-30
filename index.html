@@ -1,29 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thomaz Camargo | Tech Services</title>
-    <meta name="description" content="Assistência técnica especializada feita por quem é apaixonado por tecnologia. Soluções para computadores, notebooks, consoles e celulares.">
-    <meta name="keywords" content="assistência técnica, thomaz camargo, conserto de computador, reparo de notebook, custom rom, root, limpeza de console">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Assistência Técnica em Tecnologia | Thomaz Camargo</title>
+        <meta name="description" content="Assistência técnica especializada em computadores, notebooks, consoles e celulares. Soluções rápidas, honestas e personalizadas em São Paulo. Fale com Thomaz Camargo.">
+        <meta name="keywords" content="assistência técnica, Thomaz Camargo, conserto computador, reparo notebook, custom rom, root, limpeza console, manutenção, São Paulo, técnico, tecnologia, suporte técnico, formatação, upgrade, celular, console, PC, notebook, diagnóstico, leva e traz, atendimento pessoal, manutenção preventiva, desbloqueio, software, hardware, remoção de vírus, otimização, consultoria, orçamento grátis">
+        <meta name="author" content="Thomaz A. de Camargo">
+        <meta name="robots" content="index, follow">
+        <link rel="canonical" href="https://thomazcamargo.vercel.app/">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://thomazcamargo.vercel.app/">
+        <meta property="og:title" content="Assistência Técnica em Tecnologia | Thomaz Camargo">
+        <meta property="og:description" content="Assistência técnica especializada em computadores, notebooks, consoles e celulares. Soluções rápidas, honestas e personalizadas em São Paulo.">
+        <meta property="og:image" content="https://thomazcamargo.vercel.app/imagem-og.jpg">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Twitter -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:url" content="https://thomazcamargo.vercel.app/">
+        <meta name="twitter:title" content="Assistência Técnica em Tecnologia | Thomaz Camargo">
+        <meta name="twitter:description" content="Assistência técnica especializada em computadores, notebooks, consoles e celulares. Soluções rápidas, honestas e personalizadas em São Paulo.">
+        <meta name="twitter:image" content="https://thomazcamargo.vercel.app/imagem-og.jpg">
 
-    <link rel="stylesheet" href="style.css">
+        <!-- Schema.org JSON-LD -->
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            "name": "Thomaz Camargo | Tech Services",
+            "image": "https://thomazcamargo.vercel.app/imagem-og.jpg",
+            "@id": "https://thomazcamargo.vercel.app/",
+            "url": "https://thomazcamargo.vercel.app/",
+            "telephone": "+55 11 91452-1982",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Rua Iambu, 34",
+                "addressLocality": "São Paulo",
+                "addressRegion": "SP",
+                "postalCode": "03982-070",
+                "addressCountry": "BR"
+            },
+            "description": "Assistência técnica especializada em computadores, notebooks, consoles e celulares. Soluções rápidas, honestas e personalizadas em São Paulo.",
+            "openingHours": "Mo-Sa 09:00-18:00",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+55 11 91452-1982",
+                "contactType": "customer service",
+                "areaServed": "BR"
+            }
+        }
+        </script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <a onclick="openLink('https://wa.me/5511914521982?text=Olá! Vim pelo seu site e gostaria de um orçamento.')" class="whatsapp-flutuante" aria-label="Contato via WhatsApp">
-        <i class="fab fa-whatsapp"></i>
+    <a onclick="openLink('https://wa.me/5511914521982?text=Olá! Vim pelo seu site e gostaria de um orçamento.')" class="whatsapp-flutuante" aria-label="Contato via WhatsApp" rel="noopener" target="_blank">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        <span class="sr-only">Contato via WhatsApp</span>
     </a>
 
     <header>
         <nav class="container">
-            <a href="#" class="logo">Thomaz <span>Camargo</span></a>
+            <a href="#inicio" class="logo" aria-label="Página inicial Thomaz Camargo">Thomaz <span>Camargo</span></a>
             <ul class="nav-links">
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="#sobre">Sobre Mim</a></li>
@@ -50,21 +99,21 @@
     <main>
         <section id="inicio" class="hero">
             <div class="hero-content container">
-                <div class="hero-text">
+                <div class="hero-text" data-aos="fade-up">
                     <h1>Sua tecnologia, minha paixão.</h1>
                     <p>Soluções completas para seus dispositivos, com a dedicação de quem ama o que faz. Fale diretamente comigo e resolva seu problema.</p>
-                    <a onclick="openLink('https://wa.me/5511914521982?text=Olá! Preciso de ajuda com meu aparelho.')" class="cta-button">
-                        <i class="fab fa-whatsapp"></i> Chamar no WhatsApp
+                    <a onclick="openLink('https://wa.me/5511914521982?text=Olá! Preciso de ajuda com meu aparelho.')" class="cta-button" rel="noopener" target="_blank">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> <span>Chamar no WhatsApp</span>
                     </a>
                 </div>
             </div>
         </section>
 
         <section id="sobre" class="container">
-            <h2 class="section-title">Sobre Mim</h2>
+            <h2 class="section-title" data-aos="fade-up">Sobre Mim</h2>
             <div class="sobre-content">
-                <img src="https://via.placeholder.com/400x400/cccccc/ffffff?text=Thomaz" alt="Foto de Thomaz A. de Camargo">
-                <div class="sobre-text">
+                <img src="https://via.placeholder.com/400x400/cccccc/ffffff?text=Thomaz" alt="Foto de Thomaz A. de Camargo" width="400" height="400" loading="lazy" data-aos="fade-right">
+                <div class="sobre-text" data-aos="fade-left">
                     <h3>Prazer, sou Thomaz A. de Camargo.</h3>
                     <p>Desde pequeno, a tecnologia me fascina. O que começou como curiosidade, desmontando e montando aparelhos, virou minha paixão e profissão. Aos 16 anos, decidi transformar esse hobby em um negócio, oferecendo um serviço técnico honesto e dedicado.</p>
                     <p>Trabalho em meu próprio laboratório em casa, com todo o cuidado e atenção que seu equipamento merece. Meu objetivo é simples: resolver o seu problema de forma eficiente para que você possa voltar a usar seus dispositivos sem dor de cabeça.</p>
@@ -79,9 +128,9 @@
 
         <section id="servicos">
             <div class="container">
-                <h2 class="section-title">O que eu faço</h2>
+                <h2 class="section-title" data-aos="fade-up">O que eu faço</h2>
                 <div class="servicos-grid">
-                    <div class="servico-card">
+                    <div class="servico-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
                         <h3>Computadores & Notebooks</h3>
                         <p>Solução completa para seu PC ou notebook, do software ao hardware.</p>
@@ -93,7 +142,7 @@
                             <li>Remoção de Vírus e Malwares</li>
                         </ul>
                     </div>
-                    <div class="servico-card">
+                    <div class="servico-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="card-icon"><i class="fas fa-mobile-screen-button"></i></div>
                         <h3>Celulares (Software)</h3>
                         <p>Especialista em dar vida nova ao sistema do seu Android e IOS.</p>
@@ -105,7 +154,7 @@
                             <li><small>(Não realizo reparos de hardware por enquanto)</small></li>
                         </ul>
                     </div>
-                    <div class="servico-card">
+                    <div class="servico-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="card-icon"><i class="fas fa-gamepad"></i></div>
                         <h3>Consoles</h3>
                         <p>Manutenção e desbloqueio para garantir sua diversão.</p>
@@ -121,7 +170,7 @@
             </div>
         </section>
 
-        <section id="delivery" class="container">
+        <section id="delivery" class="container" data-aos="zoom-in">
             <div class="delivery-content">
                 <i class="fas fa-shipping-fast"></i>
                 <div>
@@ -133,18 +182,18 @@
 
         <section id="contato">
             <div class="container">
-                <h2 class="section-title">Vamos conversar?</h2>
-                <p class="contato-subtitulo">Me envie uma mensagem pelo WhatsApp ou formulário. Responderei o mais rápido possível!</p>
-                <div class="contato-wrapper">
-                     <a onclick="openLink('https://wa.me/5511914521982?text=Olá! Vim pelo seu site e gostaria de um orçamento.')" class="contato-button">
-                        <i class="fab fa-whatsapp"></i>
+                <h2 class="section-title" data-aos="fade-up">Vamos conversar?</h2>
+                <p class="contato-subtitulo" data-aos="fade-up" data-aos-delay="100">Me envie uma mensagem pelo WhatsApp ou formulário. Responderei o mais rápido possível!</p>
+                <div class="contato-wrapper" data-aos="fade-up" data-aos-delay="200">
+                     <a onclick="openLink('https://wa.me/5511914521982?text=Olá! Vim pelo seu site e gostaria de um orçamento.')" class="contato-button" rel="noopener" target="_blank">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
                         <div>
                             <span>Iniciar Conversa</span>
                             <strong>Meu WhatsApp</strong>
                         </div>
                     </a>
-                     <a onclick="openLink('mailto:thomaz.camargo30@gmail.com')" class="contato-button">
-                        <i class="fas fa-envelope"></i>
+                     <a onclick="openLink('mailto:thomaz.camargo30@gmail.com')" class="contato-button" rel="noopener" target="_blank">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
                         <div>
                             <span>Enviar um E-mail</span>
                             <strong>Meu E-mail</strong>
@@ -160,9 +209,18 @@
         <div class="container">
             <p>&copy; 2025 Thomaz A. de Camargo. Feito com paixão por tecnologia.</p>
             <p>São Paulo - SP</p>
+            <nav aria-label="Links úteis">
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre">Sobre Mim</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
         </div>
     </footer>
     
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
