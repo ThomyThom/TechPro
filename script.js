@@ -5,62 +5,48 @@ document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('.nav-links');
     const navLinks = document.querySelectorAll('.nav-links li');
 
-    // Toggle Nav
+    // Abre e fecha o menu
     burger.addEventListener('click', () => {
         nav.classList.toggle('nav-active');
-
-        // Animação dos links
-        navLinks.forEach((link, index) => {
-            if (link.style.animation) {
-                link.style.animation = '';
-            } else {
-                link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-            }
-        });
-
-        // Animação do Burger
         burger.classList.toggle('toggle');
     });
 
-    // Fechar menu ao clicar em um link
+    // Fecha o menu ao clicar em um link
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
             if (nav.classList.contains('nav-active')) {
                 nav.classList.remove('nav-active');
                 burger.classList.remove('toggle');
-                // Resetar animação para funcionar novamente
-                navLinks.forEach(link => link.style.animation = '');
             }
         });
     });
 
-    // --- LÓGICA PARA O FAQ (ACORDEÃO) ---
-    const faqItems = document.querySelectorAll('.faq-item');
+    // --- LÓGICA PARA O TEMA ESCURO (DARK MODE) ---
+    const themeToggle = document.getElementById('checkbox');
+    const currentTheme = localStorage.getItem('theme');
 
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
+    if (currentTheme) {
+        document.body.classList.add(currentTheme);
+        if (currentTheme === 'dark-mode') {
+            themeToggle.checked = true;
+        }
+    }
 
-        question.addEventListener('click', () => {
-            const answer = item.querySelector('.faq-answer');
-            const isOpen = question.classList.contains('active');
+    function switchTheme(e) {
+        if (e.target.checked) {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light-mode');
+        }
+    }
 
-            // Fecha todos os outros itens abertos para garantir que apenas um esteja aberto de cada vez
-            faqItems.forEach(otherItem => {
-                if (otherItem !== item) {
-                    otherItem.querySelector('.faq-question').classList.remove('active');
-                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
-                }
-            });
-            
-            // Abre ou fecha o item clicado
-            if (!isOpen) {
-                question.classList.add('active');
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-            } else {
-                question.classList.remove('active');
-                answer.style.maxHeight = null;
-            }
-        });
-    });
+    themeToggle.addEventListener('change', switchTheme, false);
 
 });
+
+// --- FUNÇÃO PARA ABRIR LINKS ---
+function openLink(url) {
+    window.open(url, '_blank');
+}
