@@ -10,13 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- LÓGICA PARA O MENU MOBILE (OVERLAY) ---
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-links li');
+    const navLinks = document.querySelectorAll('.nav-links li a'); // Seleciona apenas os links
 
     burger.addEventListener('click', () => {
         nav.classList.toggle('nav-active');
         burger.classList.toggle('toggle');
 
-        navLinks.forEach((link, index) => {
+        document.querySelectorAll('.nav-links li').forEach((link, index) => {
             if (link.style.animation) {
                 link.style.animation = '';
             } else {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (nav.classList.contains('nav-active')) {
                 nav.classList.remove('nav-active');
                 burger.classList.remove('toggle');
-                 navLinks.forEach(link => link.style.animation = '');
+                 document.querySelectorAll('.nav-links li').forEach(link => link.style.animation = '');
             }
         });
     });
@@ -47,28 +47,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     // --- LÓGICA PARA O TEMA ESCURO (DARK MODE) ---
-    const themeToggle = document.getElementById('checkbox');
+    const themeToggles = document.querySelectorAll('.theme-checkbox');
     const currentTheme = localStorage.getItem('theme');
 
-    if (currentTheme) {
-        document.body.classList.add(currentTheme);
-        if (currentTheme === 'dark-mode') {
-            themeToggle.checked = true;
+    function applyTheme(theme) {
+        const isDarkMode = theme === 'dark-mode';
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
         }
+        themeToggles.forEach(toggle => {
+            toggle.checked = isDarkMode;
+        });
+    }
+
+    if (currentTheme) {
+        applyTheme(currentTheme);
     }
 
     function switchTheme(e) {
-        if (e.target.checked) {
-            document.body.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark-mode');
-        } else {
-            document.body.classList.remove('dark-mode');
-            localStorage.setItem('theme', 'light-mode');
+        const newTheme = e.target.checked ? 'dark-mode' : 'light-mode';
+        localStorage.setItem('theme', newTheme);
+        applyTheme(newTheme);
+        
+        // A função loadParticles precisa ser chamada apenas se existir no escopo
+        if (typeof loadParticles === 'function') {
+            loadParticles();
         }
-        loadParticles();
     }
 
-    themeToggle.addEventListener('change', switchTheme, false);
+    themeToggles.forEach(toggle => {
+        toggle.addEventListener('change', switchTheme);
+    });
 
 
     // --- LÓGICA PARA HEADER E BOTÃO VOLTAR AO TOPO ---
@@ -112,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // --- LÓGICA DO PARTICLES.JS ---
     function loadParticles() {
+        if (typeof particlesJS === 'undefined') return;
         const isDarkMode = document.body.classList.contains('dark-mode');
         const particleColor = isDarkMode ? "#ffffff" : "#333333";
         const lineColor = isDarkMode ? "#ffffff" : "#333333";
@@ -122,45 +134,46 @@ document.addEventListener('DOMContentLoaded', function() {
             "retina_detect": true
         });
     }
-    loadParticles();
+    
+    // Garante que a função seja chamada após o script particles.js carregar
+    if (document.getElementById('particles-js')) {
+        loadParticles();
+    }
+
 
     // --- LÓGICA DE SCROLL PINNING (APENAS EM MOBILE) ---
     if (window.matchMedia("(max-width: 768px)").matches) {
         const pinWrapper = document.querySelector('.servicos-pin-wrapper');
         const servicoCards = document.querySelectorAll('.servico-card');
         
-        // Define qual card está ativo no momento
-        let currentActive = -1;
+        if (pinWrapper && servicoCards.length > 0) {
+            let currentActive = -1;
 
-        window.addEventListener('scroll', () => {
-            const wrapperRect = pinWrapper.getBoundingClientRect();
-            
-            // Só executa a lógica se a seção estiver visível
-            if (wrapperRect.top <= 0 && wrapperRect.bottom >= window.innerHeight) {
-                const scrollableDist = pinWrapper.offsetHeight - window.innerHeight;
-                const progress = Math.abs(wrapperRect.top) / scrollableDist;
+            window.addEventListener('scroll', () => {
+                const wrapperRect = pinWrapper.getBoundingClientRect();
+                
+                if (wrapperRect.top <= 0 && wrapperRect.bottom >= window.innerHeight) {
+                    const scrollableDist = pinWrapper.offsetHeight - window.innerHeight;
+                    const progress = Math.abs(wrapperRect.top) / scrollableDist;
 
-                let newActive = -1;
-                if (progress < 0.45) {
-                    newActive = 0; // Ativa o primeiro card
-                } else if (progress < 0.9) {
-                    newActive = 1; // Ativa o segundo card
-                } else {
-                    newActive = 2; // Ativa o terceiro card
+                    let newActive = -1;
+                    if (progress < 0.45) { newActive = 0; } 
+                    else if (progress < 0.9) { newActive = 1; } 
+                    else { newActive = 2; }
+
+                    if (newActive !== currentActive) {
+                        currentActive = newActive;
+                        servicoCards.forEach((card, index) => {
+                            if (index === currentActive) {
+                                card.classList.add('active');
+                            } else {
+                                card.classList.remove('active');
+                            }
+                        });
+                    }
                 }
-
-                if (newActive !== currentActive) {
-                    currentActive = newActive;
-                    servicoCards.forEach((card, index) => {
-                        if (index === currentActive) {
-                            card.classList.add('active');
-                        } else {
-                            card.classList.remove('active');
-                        }
-                    });
-                }
-            }
-        });
+            });
+        }
     }
 
 });
