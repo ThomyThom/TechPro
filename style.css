@@ -369,11 +369,11 @@ nav {
         border-top: none;
         border-left: 4px solid var(--primary-color);
         display: grid;
-        grid-template-rows: auto 0fr;
+        grid-template-rows: auto 0fr; /* Linha do header auto, linha do body 0fr (fechado) */
         transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .servico-card.active {
-        grid-template-rows: auto 1fr;
+        grid-template-rows: auto 1fr; /* Linha do body 1fr (aberto) */
     }
     
     .servico-header {
@@ -428,7 +428,7 @@ nav {
     .servico-body ul {
         list-style: none;
         margin: 0 25px 0 75px;
-        padding: 0 0 25px 20px;
+        padding: 0 0 25px 20px; /* Padding no <ul> para o espaçamento final */
         border-left: 2px solid var(--primary-color);
     }
 
