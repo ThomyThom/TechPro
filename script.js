@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('theme', newTheme);
         applyTheme(newTheme);
         
-        // A função loadParticles precisa ser chamada apenas se existir no escopo
         if (typeof loadParticles === 'function') {
             loadParticles();
         }
@@ -135,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Garante que a função seja chamada após o script particles.js carregar
     if (document.getElementById('particles-js')) {
         loadParticles();
     }
