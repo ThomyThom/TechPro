@@ -172,7 +172,7 @@ input:not(:checked) + .slider .handle .fa-moon { opacity: 0; }
     }
     
     .nav-links.nav-active { left: 0; }
-    .nav-links li { margin: 0; opacity: 0; text-align: center; }
+    .nav-links li { margin: 0; opacity: 0; text-align: center; } /* REMOVIDO TRANSFORM */
     .nav-links a { font-size: 2rem; font-family: var(--font-title); }
     
     .burger { display: block; }
