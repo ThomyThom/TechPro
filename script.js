@@ -10,11 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- LÓGICA PARA O MENU MOBILE (OVERLAY) ---
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-links li a'); // Seleciona apenas os links
+    const navLinks = document.querySelectorAll('.nav-links li a');
+    const body = document.body;
 
     burger.addEventListener('click', () => {
         nav.classList.toggle('nav-active');
         burger.classList.toggle('toggle');
+        body.classList.toggle('no-scroll');
 
         document.querySelectorAll('.nav-links li').forEach((link, index) => {
             if (link.style.animation) {
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (nav.classList.contains('nav-active')) {
                 nav.classList.remove('nav-active');
                 burger.classList.remove('toggle');
+                body.classList.remove('no-scroll');
                  document.querySelectorAll('.nav-links li').forEach(link => link.style.animation = '');
             }
         });

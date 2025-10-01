@@ -32,6 +32,7 @@ body.dark-mode {
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { font-family: var(--font-body); color: var(--text-color); background-color: var(--bg-color); line-height: 1.6; transition: background-color 0.4s, color 0.4s; }
+body.no-scroll { overflow: hidden; } /* CLASSE PARA CORRIGIR O BUG DO MENU MOBILE */
 .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 img { max-width: 100%; height: auto; }
 a { text-decoration: none; color: var(--primary-color); }
@@ -139,13 +140,7 @@ footer { background-color: var(--section-bg-color); text-align: center; padding:
 .theme-switch { display: inline-block; height: 30px; position: relative; width: 60px; }
 .theme-switch input { display:none; }
 
-.slider {
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background-color: var(--section-bg-color);
-    border-radius: 34px;
-    cursor: pointer;
-    transition: .4s;
-}
+.slider { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--section-bg-color); border-radius: 34px; cursor: pointer; transition: .4s; }
 .handle {
     position: absolute; content: "";
     height: 24px; width: 24px;
