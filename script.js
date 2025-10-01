@@ -131,20 +131,36 @@ document.addEventListener('DOMContentLoaded', function() {
         const observerOptions = {
             root: null,
             rootMargin: '0px',
-            threshold: 0.8
+            threshold: 0.5 // Um threshold de 50% funciona melhor com a nova lógica
         };
+        
+        // Armazena o último card que esteve ativo
+        let lastVisibleCard = null;
 
         const observer = new IntersectionObserver((entries) => {
+            // Verifica qual é o último card visível na lista de entries
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    servicoCards.forEach(card => {
-                        if (card !== entry.target) {
-                            card.classList.remove('active');
-                        }
-                    });
-                    entry.target.classList.add('active');
+                    lastVisibleCard = entry.target;
                 }
             });
+
+            // Ativa apenas o último card visível e desativa os outros
+            let anyCardVisible = false;
+            servicoCards.forEach(card => {
+                if (card === lastVisibleCard) {
+                    card.classList.add('active');
+                    anyCardVisible = true;
+                } else {
+                    card.classList.remove('active');
+                }
+            });
+
+            // Se nenhum card estiver visível (saiu da seção), reseta a variável
+             if (!anyCardVisible) {
+                lastVisibleCard = null;
+            }
+
         }, observerOptions);
 
         servicoCards.forEach(card => {

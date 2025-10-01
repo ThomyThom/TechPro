@@ -258,7 +258,7 @@ nav {
     color: var(--primary-color);
 }
 
-/* --- SERVIÇOS (MOBILE-FIRST: ACORDEÃO) --- */
+/* --- SERVIÇOS (MOBILE-FIRST: ACORDEÃO COM GRID) --- */
 #servicos {
     background-color: var(--section-bg-color);
     transition: background-color 0.4s;
@@ -276,9 +276,15 @@ nav {
     background: var(--card-bg-color);
     border-radius: 10px;
     box-shadow: 0 5px 25px hsla(var(--shadow-color), 0.08);
-    transition: all 0.4s ease;
     border-left: 4px solid var(--primary-color);
     padding: 0;
+    display: grid;
+    grid-template-rows: auto 0fr; /* Linha do header auto, linha do body 0fr (fechado) */
+    transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.servico-card.active {
+    grid-template-rows: auto 1fr; /* Linha do body 1fr (aberto) */
 }
 
 .servico-header {
@@ -286,6 +292,7 @@ nav {
     align-items: center;
     gap: 20px;
     padding: 25px;
+    min-height: 90px;
 }
 
 .card-icon {
@@ -310,7 +317,7 @@ nav {
     width: 20px;
     height: 20px;
     position: relative;
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .accordion-icon::before,
@@ -319,19 +326,17 @@ nav {
     position: absolute;
     background-color: var(--text-color);
     border-radius: 2px;
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .accordion-icon::before {
-    width: 100%;
-    height: 3px;
+    width: 100%; height: 3px;
     top: 50%; left: 0;
     transform: translateY(-50%);
 }
 
 .accordion-icon::after {
-    width: 3px;
-    height: 100%;
+    width: 3px; height: 100%;
     left: 50%; top: 0;
     transform: translateX(-50%);
 }
@@ -341,21 +346,13 @@ nav {
 }
 
 .servico-body {
-    max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.19, 1, 0.22, 1), 
-                padding 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-.servico-card.active .servico-body {
-    max-height: 500px;
-    padding-bottom: 25px;
 }
 
 .servico-body ul {
     list-style: none;
     margin: 0 25px 0 75px;
-    padding-left: 20px;
+    padding: 0 0 25px 20px; /* Padding no <ul> para o espaçamento final */
     border-left: 2px solid var(--primary-color);
 }
 
@@ -372,6 +369,7 @@ nav {
     }
 
     .servico-card {
+        display: block; /* Reverte para o comportamento padrão */
         padding: 35px;
         border-left: none;
         border-top: 4px solid var(--primary-color);
@@ -385,6 +383,7 @@ nav {
     .servico-header {
         display: block;
         padding: 0;
+        min-height: auto;
     }
 
     .card-icon {
@@ -399,12 +398,6 @@ nav {
     
     .accordion-icon {
         display: none;
-    }
-    
-    .servico-body {
-        max-height: initial; /* Remove a limitação de altura */
-        overflow: visible;
-        padding: 0;
     }
     
     .servico-body ul {
@@ -536,9 +529,8 @@ footer {
 
 #back-to-top-btn {
     position: fixed;
-    /* *** POSICIONAMENTO AJUSTADO AQUI *** */
-    bottom: 30px; /* Alinhado verticalmente com uma pequena margem */
-    right: 95px;  /* 25px (margem) + 60px (botão whats) + 10px (espaço) */
+    bottom: 30px;
+    right: 95px;
     width: 50px;
     height: 50px;
     background-color: var(--primary-color);
