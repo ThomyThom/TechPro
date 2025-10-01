@@ -258,7 +258,13 @@ nav {
     color: var(--primary-color);
 }
 
-/* --- SERVIÇOS (MOBILE-FIRST: ACORDEÃO COM GRID) --- */
+/* --- SERVIÇOS (SCROLL PINNING) --- */
+
+.servicos-pin-wrapper {
+    /* Este wrapper não é usado no desktop */
+    display: contents; /* Comportamento padrão */
+}
+
 #servicos {
     background-color: var(--section-bg-color);
     transition: background-color 0.4s;
@@ -266,153 +272,167 @@ nav {
 
 .servicos-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 800px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    max-width: 1100px;
+    gap: 30px;
     margin: auto;
 }
 
 .servico-card {
     background: var(--card-bg-color);
+    padding: 35px;
     border-radius: 10px;
     box-shadow: 0 5px 25px hsla(var(--shadow-color), 0.08);
-    border-left: 4px solid var(--primary-color);
-    padding: 0;
-    display: grid;
-    grid-template-rows: auto 0fr; /* Linha do header auto, linha do body 0fr (fechado) */
-    transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s ease;
+    border-top: 4px solid var(--primary-color);
 }
 
-.servico-card.active {
-    grid-template-rows: auto 1fr; /* Linha do body 1fr (aberto) */
+.servico-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px hsla(var(--shadow-color), 0.12);
 }
 
 .servico-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 25px;
-    min-height: 90px;
+    display: block;
 }
 
 .card-icon {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
     color: var(--primary-color);
 }
 
 .servico-title h3 {
     font-family: var(--font-title);
-    font-size: 1.4rem;
-    margin: 0;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
 }
 
 .servico-title p {
     margin: 0;
-    font-size: 0.9rem;
-    opacity: 0.8;
 }
 
 .accordion-icon {
-    margin-left: auto;
-    width: 20px;
-    height: 20px;
-    position: relative;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.accordion-icon::before,
-.accordion-icon::after {
-    content: '';
-    position: absolute;
-    background-color: var(--text-color);
-    border-radius: 2px;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.accordion-icon::before {
-    width: 100%; height: 3px;
-    top: 50%; left: 0;
-    transform: translateY(-50%);
-}
-
-.accordion-icon::after {
-    width: 3px; height: 100%;
-    left: 50%; top: 0;
-    transform: translateX(-50%);
-}
-
-.servico-card.active .accordion-icon {
-    transform: rotate(135deg);
-}
-
-.servico-body {
-    overflow: hidden;
+    display: none;
 }
 
 .servico-body ul {
     list-style: none;
-    margin: 0 25px 0 75px;
-    padding: 0 0 25px 20px; /* Padding no <ul> para o espaçamento final */
-    border-left: 2px solid var(--primary-color);
+    margin: 15px 0 0 0;
+    padding: 0;
 }
 
-.servico-body li { padding: 8px 0; }
-.servico-body li small { opacity: 0.7; font-style: italic; }
+.servico-body li {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--section-bg-color);
+    transition: border-color 0.4s;
+}
+.servico-body li:last-child {
+    border: none;
+}
+.servico-body li small {
+    opacity: 0.7;
+    font-style: italic;
+}
 
 
-/* --- SERVIÇOS (DESKTOP: GRADE ESTÁTICA) --- */
-@media screen and (min-width: 769px) {
+/* --- SERVIÇOS (MOBILE: EFEITO PINNING) --- */
+@media screen and (max-width: 768px) {
+    .servicos-pin-wrapper {
+        display: block;
+        height: 250vh; /* Altura do "trilho" de rolagem */
+        position: relative;
+    }
+
+    #servicos {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        width: 100%;
+        padding: 0; /* Padding será controlado pelo container */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+    }
+    
     .servicos-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        max-width: 1100px;
-        gap: 30px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 800px;
+        margin: auto;
     }
 
     .servico-card {
-        display: block; /* Reverte para o comportamento padrão */
-        padding: 35px;
-        border-left: none;
-        border-top: 4px solid var(--primary-color);
+        padding: 0;
+        border-top: none;
+        border-left: 4px solid var(--primary-color);
+        display: grid;
+        grid-template-rows: auto 0fr;
+        transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
-    .servico-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 10px 30px hsla(var(--shadow-color), 0.12);
+    .servico-card.active {
+        grid-template-rows: auto 1fr;
     }
     
     .servico-header {
-        display: block;
-        padding: 0;
-        min-height: auto;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 25px;
+        min-height: 90px;
     }
 
     .card-icon {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
+        font-size: 2rem;
+        margin-bottom: 0;
     }
     
     .servico-title h3 {
-        font-size: 1.5rem;
-        margin-bottom: 15px;
+        font-size: 1.4rem;
+        margin-bottom: 0;
     }
     
     .accordion-icon {
-        display: none;
+        display: block;
+        margin-left: auto;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .accordion-icon::before, .accordion-icon::after {
+        content: '';
+        position: absolute;
+        background-color: var(--text-color);
+        border-radius: 2px;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .accordion-icon::before {
+        width: 100%; height: 3px; top: 50%; left: 0;
+        transform: translateY(-50%);
+    }
+    .accordion-icon::after {
+        width: 3px; height: 100%; left: 50%; top: 0;
+        transform: translateX(-50%);
+    }
+    .servico-card.active .accordion-icon {
+        transform: rotate(135deg);
+    }
+
+    .servico-body {
+        overflow: hidden;
     }
     
     .servico-body ul {
-        margin: 15px 0 0 0;
-        padding: 0;
-        border: none;
+        list-style: none;
+        margin: 0 25px 0 75px;
+        padding: 0 0 25px 20px;
+        border-left: 2px solid var(--primary-color);
     }
-    
-    .servico-body li {
-        padding: 5px 0;
-        border-bottom: 1px solid var(--section-bg-color);
-    }
-    .servico-body li:last-child {
-        border: none;
-    }
+
+    .servico-body li { border: none; }
 }
 
 
@@ -623,7 +643,7 @@ input:checked + .slider .fa-sun { opacity: 0; }
 input:not(:checked) + .slider .fa-moon { opacity: 0; }
 
 
-/* --- RESPONSIVIDADE E MENU MOBILE --- */
+/* --- RESPONSIVIDADE GERAL E MENU MOBILE --- */
 .burger { 
     display: none; 
     cursor: pointer; 
@@ -686,8 +706,4 @@ input:not(:checked) + .slider .fa-moon { opacity: 0; }
     .sobre-content img { width: 200px; height: 200px; }
 
     .delivery-content { flex-direction: column; text-align: center; }
-
-    .servico-body ul {
-        margin-left: 25px; /* Ajuste para mobile */
-    }
 }

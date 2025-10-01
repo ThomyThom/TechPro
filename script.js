@@ -124,47 +124,42 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     loadParticles();
 
-    // --- LÓGICA DE ACORDEÃO (APENAS EM MOBILE) ---
+    // --- LÓGICA DE SCROLL PINNING (APENAS EM MOBILE) ---
     if (window.matchMedia("(max-width: 768px)").matches) {
+        const pinWrapper = document.querySelector('.servicos-pin-wrapper');
         const servicoCards = document.querySelectorAll('.servico-card');
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5 // Um threshold de 50% funciona melhor com a nova lógica
-        };
         
-        // Armazena o último card que esteve ativo
-        let lastVisibleCard = null;
+        // Define qual card está ativo no momento
+        let currentActive = -1;
 
-        const observer = new IntersectionObserver((entries) => {
-            // Verifica qual é o último card visível na lista de entries
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    lastVisibleCard = entry.target;
-                }
-            });
+        window.addEventListener('scroll', () => {
+            const wrapperRect = pinWrapper.getBoundingClientRect();
+            
+            // Só executa a lógica se a seção estiver visível
+            if (wrapperRect.top <= 0 && wrapperRect.bottom >= window.innerHeight) {
+                const scrollableDist = pinWrapper.offsetHeight - window.innerHeight;
+                const progress = Math.abs(wrapperRect.top) / scrollableDist;
 
-            // Ativa apenas o último card visível e desativa os outros
-            let anyCardVisible = false;
-            servicoCards.forEach(card => {
-                if (card === lastVisibleCard) {
-                    card.classList.add('active');
-                    anyCardVisible = true;
+                let newActive = -1;
+                if (progress < 0.45) {
+                    newActive = 0; // Ativa o primeiro card
+                } else if (progress < 0.9) {
+                    newActive = 1; // Ativa o segundo card
                 } else {
-                    card.classList.remove('active');
+                    newActive = 2; // Ativa o terceiro card
                 }
-            });
 
-            // Se nenhum card estiver visível (saiu da seção), reseta a variável
-             if (!anyCardVisible) {
-                lastVisibleCard = null;
+                if (newActive !== currentActive) {
+                    currentActive = newActive;
+                    servicoCards.forEach((card, index) => {
+                        if (index === currentActive) {
+                            card.classList.add('active');
+                        } else {
+                            card.classList.remove('active');
+                        }
+                    });
+                }
             }
-
-        }, observerOptions);
-
-        servicoCards.forEach(card => {
-            observer.observe(card);
         });
     }
 
